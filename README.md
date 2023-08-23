@@ -1,7 +1,9 @@
 # CDR encoding/decoding for zenoh-pico
 
 This example is showing how to leverage the CDR encoding/decoding library from CycloneDDS in a zenoh-pico application.
-This allows a zenoh-pico application to publish or subscribe to a DDS application, using the [zenoh-bridge-dds](https://github.com/eclipse-zenoh/zenoh-plugin-dds) as an intermediate.
+This allows the zenoh-pico application to publish or subscribe to a DDS application, using the [zenoh-bridge-dds](https://github.com/eclipse-zenoh/zenoh-plugin-dds) as an intermediate.
+
+This example is compatible with CycloneDDS' [helloworld example](https://github.com/eclipse-cyclonedds/cyclonedds/tree/master/examples/helloworld).
 
 ## Prerequisite:
 
@@ -33,7 +35,17 @@ make
      - `-e <endpoint>`: a Zenoh endpoint to establish the connection with (e.g.: `tcp/192.168.2.3:7447`). Default: zenoh-pico tries to discover a Zenoh router via UDP multicast.
      - `-m <client|peer>`: the mode in which zenoh-pico is running. Default: `client`
 
+## Example of usage (on localhost):
 
+ - zenoh-pico publisher and CycloneDDS subscriber:
+    - run: `zenoh-bridge-dds -l tcp/0.0.0.0:7447`
+    - run: `HelloworldSubscriber`
+    - run: `z_pub_cdr -e tcp/127.0.0.1:7447`
+
+ - CycloneDDS publisher and zenoh-pico subscriber:
+    - run: `zenoh-bridge-dds -l tcp/0.0.0.0:7447`
+    - run: `z_sub_cdr -e tcp/127.0.0.1:7447`
+    - run: `HelloworldPublisher`
 
 
 

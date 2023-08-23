@@ -66,10 +66,8 @@ int main(int argc, char **argv)
 
     // Set HelloWorld IDL message
     HelloWorldData_Msg msg;
-    msg.message = "Hi from Zenoh!!";
-    msg.timestamp = get_timestamp();
-    msg.index = 0;
-    msg.msg_size = HelloWorldData_MSG_SIZE_16B;
+    msg.userID = 1;
+    msg.message = "Hello World from zenoh-pico!";
 
     z_owned_config_t config = z_config_default();
     zp_config_insert(z_config_loan(&config), Z_CONFIG_MODE_KEY, z_string_make(mode));
@@ -108,7 +106,7 @@ int main(int argc, char **argv)
     // Allocate buffer for serialized message
     uint8_t *buf = malloc(alloc_size);
 
-    for (int idx = 0; 1; ++idx)
+    for (int idx = 0; idx < 1; ++idx)
     {
         sleep(1);
         printf("Putting Data ('%s')...\n", keyexpr);
@@ -120,9 +118,6 @@ int main(int argc, char **argv)
         os.m_index = sizeof(cdr_header); // Offset for CDR Xtypes header
         os.m_size = alloc_size;
         os.m_xcdr_version = DDSI_RTPS_CDR_ENC_VERSION_2;
-
-        msg.timestamp = get_timestamp();
-        msg.index = idx;
 
         // Do serialization
         bool ret = dds_stream_write(&os, &dds_cdrstream_default_allocator,

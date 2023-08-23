@@ -23,7 +23,7 @@ void data_handler(const z_sample_t *sample, void *arg)
     (void)(arg);
 
     z_owned_str_t keystr = z_keyexpr_to_string(sample->keyexpr);
-    printf(">> [Subscriber] Received ('%s' size '%d')\n", z_loan(keystr), (int)sample->payload.len);
+    printf("=== [Subscriber] Received (on '%s' - %d bytes) : ", z_loan(keystr), (int)sample->payload.len);
     z_drop(z_move(keystr));
 
     // Approximate amount of memory needed to decode incoming message
@@ -35,7 +35,8 @@ void data_handler(const z_sample_t *sample, void *arg)
     // Deserialize Msg
     idl_deser(((unsigned char *)sample->payload.start + 4), (int)sample->payload.len, msgData, &HelloWorldData_Msg_desc);
 
-    printf(">> [%d - %d] %d bytes message: '%s'", msg->timestamp, msg->index, msg->msg_size, msg->message);
+    printf("Message (%" PRId32 ", %s)\n", msg->userID, msg->message);
+    fflush(stdout);
 }
 
 int main(int argc, char **argv)

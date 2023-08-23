@@ -1,12 +1,9 @@
 module HelloWorldData
 {
-  enum MsgSize{MSG_SIZE_0B,MSG_SIZE_16B, MSG_SIZE_512B, MSG_SIZE_1KB, MSG_SIZE_512KB, MSG_SIZE_1MB, MSG_SIZE_2MB, MSG_SIZE_10MB};
   struct Msg
   {
     @key
+    long userID;
     string message;
-    long timestamp;
-    long index;
-    MsgSize msg_size;
   };
 };
