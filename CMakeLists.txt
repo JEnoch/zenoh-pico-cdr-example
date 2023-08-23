@@ -52,6 +52,7 @@ FetchContent_Declare(cyclonedds_cdr
 FetchContent_MakeAvailable(cyclonedds_cdr)
 
 # IDL code generation
+find_package(CycloneDDS REQUIRED)
 file(GLOB IDL_FILES idl/*.idl)
 idlc_generate(TARGET IdlGenerated_lib FILES ${IDL_FILES} WARNINGS no-implicit-extensibility)
 include_directories(${CMAKE_BINARY_DIR})

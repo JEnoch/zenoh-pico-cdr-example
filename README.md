@@ -5,7 +5,7 @@ This allows a zenoh-pico application to publish or subscribe to a DDS applicatio
 
 ## Prerequisite:
 
- - CycloneDDS' `idlc` code generator must be installed and accessible in the `${PATH}`
+ - CycloneDDS installed and its `idlc` code generator accessible in the `${PATH}`
  - CMake 2.14+
 
 ## How to build:
